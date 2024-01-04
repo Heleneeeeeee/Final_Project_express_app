@@ -1,13 +1,17 @@
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('HolidayVouchers', {
+    return sequelize.define('HolidaysVoucher', {
         amount: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
         
         paymentMethod: {
             type: DataTypes.INTEGER
         },
+
+        UserId : {
+            type: DataTypes.INTEGER,
+        }
 
         
     });
