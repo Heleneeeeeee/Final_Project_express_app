@@ -20,10 +20,14 @@ app.use((req, res, next) => {
 const userRouter = require ('./routes/userRoutes')
 const requestRouter = require ('./routes/requestRoutes')
 const holidayVoucherRouter = require ('./routes/holidayVoucherRoutes')
+const leisureRouter = require ('./routes/leisureRoutes')
+const rentalRouter = require ('./routes/rentalRoutes')
 
 app.use('/api/users', userRouter)
-app.use('/api/holidays', holidayVoucherRouter)
 app.use('/api/requests', requestRouter)
+app.use('/api/holidays', holidayVoucherRouter)
+app.use('/api/leisures', leisureRouter)
+app.use('/api/rentals', rentalRouter)
 
 app.use('/uploadedFiles', express.static(__dirname + '/uploadedFiles'));
 
