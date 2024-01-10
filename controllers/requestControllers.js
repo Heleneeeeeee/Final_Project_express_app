@@ -1,9 +1,11 @@
 const { ValidationError } = require('sequelize')
-const { Request, User} = require('../db/sequelizeSetup')
+const { Request, User, Rental, HolidaysVoucher, Leisure} = require('../db/sequelizeSetup')
 
 
 const findAllRequests = (req, res) => {
-    Request.findAll({ include: User })
+    Request.findAll({
+        include: [User, Rental, HolidaysVoucher, Leisure]
+    })
         .then(result => {
             res.json(result)
         })

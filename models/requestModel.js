@@ -3,13 +3,8 @@ module.exports = (sequelize, DataTypes) => {
         status: {
             type: DataTypes.STRING,
         },
-        checkNumber: {
-            type:DataTypes.INTEGER
-        }
-    }, {
-        updatedAt: false,
-        createdAt:false
-    },
+        
+    }
 
     );
 }

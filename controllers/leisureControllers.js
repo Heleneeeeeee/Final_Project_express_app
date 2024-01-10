@@ -32,7 +32,28 @@ const createLeisure = (req, res) => {
             if(!user){
                 return res.status(404).json({message:`L'utilisateur n'a pas été trouvé`})
             }
-            const newLeisure = { ...req.body, UserId:user.id }
+            const newLeisure = { ...req.body, UserId: user.id}
+            Leisure.create(newLeisure)
+                .then((leisure) => {
+                    res.status(201).json({ message: 'Le chèque vacances a bien été créé.', data: leisure })
+                    console.log(leisure)
+                })
+                .catch((error) => {
+                if (error instanceof UniqueConstraintError || error instanceof ValidationError) {
+                    return res.status(400).json({ message: error.message })
+                }
+                res.status(500).json({ message: `Le chèque vacances n'a pas pu être créé.`, data: error.message })
+            })
+            })
+        }
+
+const createLeisureWithImg = (req, res) => {
+    User.findOne({ where: { username: req.username} })
+        .then(user => {
+            if(!user){
+                return res.status(404).json({message:`L'utilisateur n'a pas été trouvé`})
+            }
+            const newLeisure = { ...req.body, UserId: user.id, receipt: `${req.protocol}://${req.get('host')}/uploadedFiles/${req.file.filename}` }
 
             Leisure.create(newLeisure)
                 .then((leisure) => {
@@ -91,4 +112,4 @@ const deleteLeisure = (req, res) => {
     
 }
 
-module.exports = {findAllLeisures, createLeisure, findLeisureByPk, updateLeisure, deleteLeisure}
+module.exports = {findAllLeisures, createLeisure, createLeisureWithImg, findLeisureByPk, updateLeisure, deleteLeisure}

@@ -5,7 +5,7 @@ const RequestModel = require('../models/requestModel');
 const HolidaysVoucherModel = require('../models/holidaysVoucherModel');
 const LeisureModel = require('../models/leisureModel');
 const RentalModel = require('../models/rentalModel');
-const  {setRoles, setUsers} = require ('./setDataSample');
+const  {setRoles, setUsers, setHolidaysVouchers, setRentals, setLeisures, setRequests} = require ('./setDataSample');
 
 
 const sequelize = new Sequelize ('cse_fojl', 'root', '', {
@@ -40,7 +40,10 @@ sequelize.sync({ force: true })
     .then (async()=> {
         await setRoles(Role)
         await setUsers(User)
-        
+        await setHolidaysVouchers(HolidaysVoucher)
+        await setRentals(Rental)
+        await setLeisures(Leisure)
+        await setRequests(Request)
 })
 
 
